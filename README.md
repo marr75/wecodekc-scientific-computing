@@ -11,6 +11,10 @@ A github account will allow you to build and collaborate on software using githu
 #### [Binder](https://mybinder.org/)
 Binder allows you to launch notebook servers directly from a github repository link. We will use it to host our labs.
 
+You can launch this repository in binder directly from the binder badge.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marr75/wecodekc-scientific-computing/HEAD)
+
 #### [FreeCodeCamp](https://www.freecodecamp.org/)
 FreeCodeCamp offers a large selection of interactive learning experiences for various programming and computer science topics. You can use your github account to sign in and preserve your progress across sessions. In this camp, we'll be most interested in [scientific computing with python](https://www.freecodecamp.org/learn/scientific-computing-with-python/) and [data analysis with python](https://www.freecodecamp.org/learn/data-analysis-with-python/).
 
