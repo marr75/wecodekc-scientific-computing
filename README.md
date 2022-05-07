@@ -1,5 +1,6 @@
 # WeCodeKC Scientific Computing
 ### Instructed by: matt@mysidewalk.com
+### Quick link: https://bit.ly/wecodekc-science
 Contains notebooks for my WeCodeKC Scientific Computing course for WCKC students
 
 ## Useful Resources
