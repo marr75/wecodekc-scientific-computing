@@ -5,5 +5,4 @@ dependencies:
   - numpy
   - pandas
   - matplotlib
-  - scipy
-  - sympy
+  - autoviz
