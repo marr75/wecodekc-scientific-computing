@@ -1,0 +1,10 @@
+name: wecode-science
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pandas
+  - matplotlib
+  - scipy
+  - sympy
