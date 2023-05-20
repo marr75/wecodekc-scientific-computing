@@ -26,7 +26,7 @@ We will be running python in interactive notebook environments hosted originally
 - Week 1: Log-in check, python & colab orientation
   - Ensure students can access their GitHub & CoLab accounts
   - Explore the basic features of CoLab and iPython
-- Week 2: Exploring python basics
+- Week 2-5: Exploring python basics
   - Syntax
   - Variables & data types
   - Control structures
