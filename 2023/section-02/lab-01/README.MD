@@ -1,9 +1,6 @@
 # WeCode KC Scientific Computing
 ## Section 2 Lab 1: Pandas and Data Visualization
 
-# WeCode KC Scientific Computing
-## Section 2 Lab 1: Pandas and Data Visualization
-
 In this lab, we will be focusing on pandas, a powerful data manipulation library in Python, and AutoViz, a tool to automate the process of visualizing datasets. Our goal is to familiarize you with these powerful tools so you can start analyzing and visualizing data in no time!
 
 Outline:
