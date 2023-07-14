@@ -1,10 +1,16 @@
 name: wecode-science
 channels:
   - conda-forge
+  - pytorch
+  - nvidia
 dependencies:
   - numpy
   - pandas
   - matplotlib
   - autoviz
-  - keras
-  - tensorflow
+  - transformers
+  - pytorch-cuda
+  - torchvision
+  - pip
+  - pip:
+    - audiocraft
