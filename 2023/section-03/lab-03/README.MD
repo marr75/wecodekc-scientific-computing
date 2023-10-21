@@ -6,9 +6,9 @@ In this lab, we will be using a pre-trained model from Facebook research to gene
 We'll learn more about neural networks and Transformers in future labs. Today will exploratory.
 
 Outline:
-- [Neural Network Beginnings](neural-network-beginnings.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-02/lab-03/neural-network-beginnings.ipynb)
-- [MusicGen](musicgen.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-02/lab-03/musicgen.ipynb)
-- [Gradio App](musicgen-gradio.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-02/lab-03/musicgen-gradio.ipynb)
+- [Neural Network Beginnings](neural-network-beginnings.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-03/lab-03/neural-network-beginnings.ipynb)
+- [MusicGen](musicgen.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-03/lab-03/musicgen.ipynb)
+- [Gradio App](musicgen-gradio.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-03/lab-03/musicgen-gradio.ipynb)
 
 By the end of this lab, you will be able to:
 - Understand the basics of neural networks
