@@ -46,4 +46,5 @@ By the end of this lab, you'll learn how to:
 This is not just about learning theory; it's about getting hands-on experience with the tools and techniques that power modern AI applications. Let's get started and see how we can teach computers to understand language a bit more like we do.
 
 [Embedding Documents](embedding-documents.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-03/lab-02/embedding-documents.ipynb)
+
 [Challenge Train Your Own Embeddings](challenge-train-your-own.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2023/section-03/lab-02/challenge-train-your-own.ipynb)
