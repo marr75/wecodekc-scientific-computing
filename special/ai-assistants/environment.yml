@@ -1,0 +1,13 @@
+name: wecode-ai
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.11
+  - python-dotenv
+  - pydantic
+  - tenacity
+  - openai
+  - pytest
+  - mypy
