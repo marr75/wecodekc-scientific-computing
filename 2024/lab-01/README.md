@@ -77,4 +77,4 @@ Let's get started and see how we can teach computers to understand language a bi
 
 [Explore: Word Embeddings](explore-word-embeddings.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-01/explore-word-embeddings.ipynb)
 
-[Big Picture: Clustering and Search](clustering-search.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-01/clustering-search.ipynb)
+[Big Picture: Clustering and Search](clustering-search.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-01/cluster-search.ipynb)
