@@ -1,4 +1,4 @@
-# %% markdown
+# %% [markdown]
 # # Explore Word Embeddings
 # Let's explore word embeddings further. This time, we'll provide some "machinery" to make exploring them easy.
 # After running the example usage, you can explore on your own by adding more words and operations.
@@ -120,11 +120,12 @@ append_embedded_word_into_df(words_df, computed_queen)
 
 plot_words(words_df)
 
-# %% markdown
+# %% [markdown]
 # ## Explore on your own
 # Now, you can explore on your own by adding more words and operations.
 # Modify the code below to repeat the example code above with your new list of words and operations.
 # Try to find interesting relationships between words.
+
 # %%
 # Put your words here
 my_words = []

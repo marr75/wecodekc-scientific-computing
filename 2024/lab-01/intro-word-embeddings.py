@@ -1,4 +1,4 @@
-# %% markdown
+# %% [markdown]
 # # Introduction to Word Embeddings
 #
 # ## Install Required Libraries
@@ -7,6 +7,7 @@
 # - umap to reduce the dimensionality of the embeddings
 # - plotly to visualize the embeddings
 # So let's install them first!
+
 # %%
 # !pip install sentence-transformers umap-learn plotly -q --upgrade
 
