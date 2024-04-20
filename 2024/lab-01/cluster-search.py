@@ -43,7 +43,13 @@ reduced_words_df["word"] = word_list.all_words
 
 # %%
 # Plot the reduced word embeddings
-fig = px.scatter(reduced_words_df, x="x", y="y", hover_data=["word"])
+fig = px.scatter(
+    reduced_words_df,
+    x="x",
+    y="y",
+    # text="word",
+    hover_data=["word"],
+)
 fig.update_layout(title="Word Embeddings Visualization", xaxis_title="X", yaxis_title="Y", legend_title="Words")
 fig.update_traces(marker_size=5)
 fig.show()
