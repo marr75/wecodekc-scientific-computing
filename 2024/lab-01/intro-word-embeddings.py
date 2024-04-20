@@ -1,3 +1,16 @@
+# %% markdown
+# # Introduction to Word Embeddings
+#
+# ## Install Required Libraries
+# We're going to use
+# - sentence-transformers to encode words into embeddings
+# - umap to reduce the dimensionality of the embeddings
+# - plotly to visualize the embeddings
+# So let's install them first!
+# %%
+# !pip install sentence-transformers umap-learn plotly -q --upgrade
+
+# %%
 import sentence_transformers
 import umap
 import pandas as pd

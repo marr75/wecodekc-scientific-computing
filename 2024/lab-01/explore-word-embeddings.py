@@ -1,3 +1,13 @@
+# %% markdown
+# # Explore Word Embeddings
+# Let's explore word embeddings further. This time, we'll provide some "machinery" to make exploring them easy.
+# After running the example usage, you can explore on your own by adding more words and operations.
+# You will try to come up with additional sets of words that have "mathematical" relationships.
+
+# %%
+# !pip install sentence-transformers umap-learn plotly -q --upgrade
+
+# %%
 import dataclasses
 
 import sentence_transformers
@@ -5,7 +15,6 @@ import umap
 import pandas as pd
 import numpy as np
 import plotly.express as px
-
 
 # %%
 # Helpful tools
@@ -111,5 +120,21 @@ append_embedded_word_into_df(words_df, computed_queen)
 
 plot_words(words_df)
 
+# %% markdown
+# ## Explore on your own
+# Now, you can explore on your own by adding more words and operations.
+# Modify the code below to repeat the example code above with your new list of words and operations.
+# Try to find interesting relationships between words.
 # %%
-# Explore on your own
+# Put your words here
+my_words = []
+# Make embedded words from your words
+my_embedded_words = _
+# Make a dataframe from your embedded words
+my_words_df = _
+# Compute additional words
+_ = _ + _ - _  # Repeat this line for each computed word
+# Add the computed words into the dataframe
+append_embedded_word_into_df(my_words_df, _)  # Repeat this line for each computed word
+# Plot the words
+_(_)
