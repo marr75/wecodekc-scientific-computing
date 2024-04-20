@@ -24,7 +24,7 @@ Trevor Lawrence
 Aaron Judge
 Carli Lloyd
 Caeleb Dressel
-""".strip().split()
+""".strip().splitlines()
 
 dishes = """
 Chicken Parmesan
@@ -52,7 +52,7 @@ French Onion Soup
 Eggplant Parmesan
 Beef Bourguignon
 Greek Salad
-""".strip().split()
+""".strip().splitlines()
 
 actors = """
 Zendaya
@@ -80,7 +80,7 @@ Finn Wolfhard
 Hailee Steinfeld
 Tom Hiddleston
 Margot Robbie
-""".strip().split()
+""".strip().splitlines()
 
 music_artists = """
 Billie Eilish
@@ -108,7 +108,7 @@ Megan Thee Stallion
 SZA
 Halsey
 J Balvin
-""".strip().split()
+""".strip().splitlines()
 
 historical_figures = """
 Nelson Mandela
@@ -136,7 +136,7 @@ Haile Selassie
 Patrice Lumumba
 Mansa Musa
 Sarojini Naidu
-""".strip().split()
+""".strip().splitlines()
 
 jobs = """
 Software Developer
@@ -164,7 +164,7 @@ Fashion Designer
 Veterinarian
 Social Worker
 Electrician
-""".strip().split()
+""".strip().splitlines()
 
 countries = """
 United States
@@ -192,7 +192,7 @@ Indonesia
 Thailand
 New Zealand
 Argentina
-""".strip().split()
+""".strip().splitlines()
 
 colors = """
 Red
@@ -220,4 +220,6 @@ Cyan
 Mauve
 Beige
 Indigo
-""".strip().split()
+""".strip().splitlines()
+
+all_words = athletes + dishes + actors + music_artists + historical_figures + jobs + countries + colors
