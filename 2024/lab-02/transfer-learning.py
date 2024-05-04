@@ -26,22 +26,6 @@
 # 2. **Feature Extraction:** Here, we treat the pre-trained model as an arbitrary feature extractor, allowing it to extract useful features from new data. We then use these features to train new layers of the network for a new task.
 #
 # Today, we are going to follow these steps on a pre-trained ResNet model.
-#
-# ## From Language Model to Chat Agent
-#
-# The process of evolving a language model into a chat agent or, in our case, an image classifier, can be divided into several steps. This concept is perfectly illustrated by [Andrej Karpathy's presentation](https://www.youtube.com/watch?v=bZQun8Y4L2A) on how OpenAI iteratively develops its models:
-#
-# 1. **Large Language Model (LLM):** We start with a large-scale model trained on a vast amount of text data from the internet. The model doesn't know any specifics about the task we're interested in, but it has learned a lot about language in general.
-#
-# 2. **Task-Specific Tuning:** The model is then adapted for a more specific task. Techniques such as fine-tuning or feature extraction can be employed here depending on the nature of the task. The model starts to learn more about the task using the general knowledge it acquired during the first phase.
-#
-# 3. **Reinforcement Learning from Human Feedback (RLHF):** Next, the model's performance is iteratively improved based on feedback from humans. Human experts review the model's outputs, whether that's generating text or classifying images, and provide feedback. The model then uses this feedback to improve.
-#
-# 4. **Application-Specific Tuning:** Finally, the model is further refined to fit a specific application. In the case of a chat agent, this would be fine-tuning for chat-based interaction. In our context, it would involve adapting our model to differentiate between bees and ants accurately.
-#
-# In this notebook, we'll be applying similar principles as we use a pre-trained ResNet model to classify images of bees and ants. We'll explore two techniques - fine-tuning and feature extraction - and observe how they impact the performance of our model in this task. Let's get started!
-#
-#
 
 # %% [markdown]
 # ## Import necessary libraries and modules
@@ -67,6 +51,8 @@ from IPython.display import display
 
 # %%
 # Define device - use GPU if available, else use CPU
+# GPU is a type of processor in your computer that's good at handling lots of data at once
+# CPU is the main processor in your computer that does most of the work
 if torch.cuda.is_available():
     device = torch.device("cuda")
 elif torch.backends.mps.is_available():
@@ -82,6 +68,10 @@ display(device)
 
 # %%
 def load_hymenoptera_data():
+    """
+    Function to download and prepare the data
+    We're going to use just pictures of bees and ants from a popular AI dataset with hundreds of thousands of photos
+    """
     # URL of the .zip file
     url = "https://download.pytorch.org/tutorial/hymenoptera_data.zip"
     hymenoptera_zip = current_working_directory / "hymenoptera_data.zip"
@@ -103,17 +93,19 @@ def load_hymenoptera_data():
 def plot_image(input_image: Tensor, title: str = None):
     """
     Function to display an image from tensor
+    Tensor is a fancy name for a multi-dimensional array
     """
     # Convert image to numpy
     input_image = input_image.numpy().transpose((1, 2, 0))
+    # Un-normalize the image
     mean = np.array([0.485, 0.456, 0.406])
-    std = np.array([0.229, 0.224, 0.225])
-    input_image = std * input_image + mean
+    standard_deviation = np.array([0.229, 0.224, 0.225])
+    input_image = standard_deviation * input_image + mean
     input_image = np.clip(input_image, 0, 1)
-    fig = px.imshow(input_image)
+    figure = px.imshow(input_image)
     if title is not None:
-        fig.update_layout(title=title)
-    fig.show()
+        figure.update_layout(title=title)
+    figure.show()
 
 
 def train_model(model, criterion, optimizer, scheduler, max_epochs=50, max_time=120):
@@ -206,7 +198,7 @@ def visualize_model_predictions(model, batches=1):
 
     Args:
         model (nn.Module): The trained model.
-        number_of_images (int, optional): Number of images to display. Default is 6.
+        batches (int): The number of batches to visualize. Default is 1.
     """
     was_training = model.training
     model.eval()  # Set model to evaluation mode
@@ -235,71 +227,92 @@ def visualize_model_predictions(model, batches=1):
     model.train(mode=was_training)
 
 
-# %% [markdown] id="e8256f3d"
+# %% [markdown]
 # ## Download and prepare the data
 #
 # We're going to use just pictures of bees and ants from a popular AI dataset with hundreds of thousands of photos
 
-# %% id="fda7233b"
 # Prepare the dataset
+# We define transformations for the images in our dataset
+# These transformations will help our model learn better
 data_transformations = {
-    # Data augmentation and normalization for training
+    # For training, we use data augmentation and normalization
     "train": torchvision.transforms.Compose(
         [
+            # Randomly resize and crop the image to 224x224 pixels
             torchvision.transforms.RandomResizedCrop(224),
+            # Randomly flip the image horizontally
             torchvision.transforms.RandomHorizontalFlip(),
+            # Convert the image to PyTorch Tensor data type
             torchvision.transforms.ToTensor(),
+            # Normalize the image with mean and standard deviation
             torchvision.transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
         ]
     ),
-    # Just normalization for validation (no flipping, no random resizing!)
+    # For validation, we only use normalization
     "val": torchvision.transforms.Compose(
         [
+            # Resize the image to 256x256 pixels
             torchvision.transforms.Resize(256),
+            # Crop the image to 224x224 pixels around the center
             torchvision.transforms.CenterCrop(224),
+            # Convert the image to PyTorch Tensor data type
             torchvision.transforms.ToTensor(),
+            # Normalize the image with mean and standard deviation
             torchvision.transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
         ]
     ),
 }
 
+# Get the current working directory
 current_working_directory = Path.cwd()
 
+# Load the dataset
 data_directory = load_hymenoptera_data()
 
+# Create image datasets for training and validation
+# ImageFolder is a PyTorch class for handling image datasets
 image_datasets = {
     x: torchvision.datasets.ImageFolder(os.path.join(data_directory, x), data_transformations[x])
     for x in ["train", "val"]
 }
+
+# Create data loaders for training and validation
+# Data loaders make it easy to generate batches of data
 data_loaders = {
     x: torch.utils.data.DataLoader(image_datasets[x], batch_size=4, shuffle=True, num_workers=0)
     for x in ["train", "val"]
 }
+
+# Get the size of the datasets
 dataset_sizes = {x: len(image_datasets[x]) for x in ["train", "val"]}
+
+# Get the class names in the dataset
 class_names = image_datasets["train"].classes
 
+# Display the dataset sizes and class names
 display(
     f"Dataset dimensions: {dataset_sizes}",
     f"Class names: {class_names}",
 )
 
-# %% id="4695db61"
+# %%
 # Get a batch of training data
 inputs, classes = next(iter(data_loaders["train"]))
 
 # Make a grid from batch
 out = torchvision.utils.make_grid(inputs)
 
+# Display the images in the batch
 plot_image(out, title=", ".join([class_names[x] for x in classes]))
 
-# %% [markdown] id="afbe1ee1"
+# %% [markdown]
 # ## Loading the pre-trained model
 #
 # ...and replacing the final layer to repurpose the pre-trained model to detect bees and ants!
 
-# %% id="727a526a"
-# Fine-tuning the convolutional neural network
-# Load a pretrained model and reset final fully connected layer.
+# %%
+# Load a pre-trained model and reset final fully connected layer.
 model_to_finetune = torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
 
 # We will create a new fully connected layer
@@ -326,23 +339,25 @@ model_to_finetune = train_model(
     model_to_finetune, criterion, optimizer_finetune, exp_lr_scheduler, max_epochs=50, max_time=120
 )
 
-# %% [markdown] id="00140e24"
+# %% [markdown]
 # ## Now we'll show the model's predictions
 
-# %% id="e0af4e4f"
+# %%
 visualize_model_predictions(model_to_finetune, batches=3)
 
-# %% [markdown] id="zYZXQYeVLGzp"
+# %% [markdown]
 # # Pre-trained model as fixed feature extractor
 
-# %% id="40d9a5ae"
-# Load a pretrained model
+# %%
+# Load a pre-trained model
 model_with_ffe = torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
+
 # Freeze all the parameters
+# This means that these parameters will not be updated during training
 for param in model_with_ffe.parameters():
     param.requires_grad = False
 
-# Again, we will create a new fully connected layer
+# We will create a new fully connected layer
 # The code is identical but this time, this layer will be the only layer optimized
 n_input_features = model_with_ffe.fc.in_features
 n_output_features = len(class_names)
@@ -352,6 +367,7 @@ model_with_ffe = model_with_ffe.to(device)
 # Optimize the model for use with our device
 model_with_ffe = model_with_ffe.to(device)
 
+# Cross entropy loss will be the loss criterion
 criterion = nn.CrossEntropyLoss()
 
 # Only the final, fully-connected layer is being optimized.
@@ -363,7 +379,5 @@ exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ffe, step_size=7, gamma=0
 # Train and evaluate the fine-tuned model
 model_with_ffe = train_model(model_with_ffe, criterion, optimizer_ffe, exp_lr_scheduler, max_epochs=50, max_time=120)
 
-# %% id="cgPXBEG4LGzp"
+# %%
 visualize_model_predictions(model_with_ffe, batches=3)
-
-# %% id="ZqdJU7m2MBhO"
