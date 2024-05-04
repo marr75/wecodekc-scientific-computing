@@ -42,8 +42,8 @@ By the end of this lab, you'll learn how to:
 
 Let's dive into how we can leverage existing AI models to accelerate the development of new solutions.
 
-[Intro to Transfer Learning](intro-transfer-learning.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/intro-transfer-learning.ipynb)
+[Unsupervised Learning](unsupervised-learning.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/unsupervised-learning.ipynb)
 
-[Implementing a Text Classifier](implement-text-classifier.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/implement-text-classifier.ipynb)
+[Text Classifier with Transfer Learning](text-classifier.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/text-classifier.ipynb)
 
-[Real-World Applications of Transfer Learning](applications-transfer-learning.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/applications-transfer-learning.ipynb)
+[Image Classifier with Transfer Learning](image-classifier.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/image-classifier.ipynb)

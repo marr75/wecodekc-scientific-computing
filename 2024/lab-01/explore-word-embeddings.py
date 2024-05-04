@@ -55,7 +55,7 @@ class EmbeddedWord:
         Add two EmbeddedWord objects
         """
         return EmbeddedWord(
-            f"{self.word} + {other.word}",
+            f"{self.word} + {other.text}",
             self.embedding + other.embedding,
             self.reduced_embedding + other.reduced_embedding,
         )
@@ -65,7 +65,7 @@ class EmbeddedWord:
         Subtract two EmbeddedWord objects
         """
         return EmbeddedWord(
-            f"{self.word} - {other.word}",
+            f"{self.word} - {other.text}",
             self.embedding - other.embedding,
             self.reduced_embedding - other.reduced_embedding,
         )
@@ -78,7 +78,7 @@ def make_dataframe_from_words(embedded_words):
     df = pd.DataFrame(
         [
             {
-                "words": embedded_word.word,
+                "words": embedded_word.text,
                 "x": embedded_word.reduced_embedding[0],
                 "y": embedded_word.reduced_embedding[1],
             }
@@ -106,7 +106,7 @@ def append_embedded_word_into_df(words_df, embedded_word):
     """
     Add two words and their computed embedding into the DataFrame
     """
-    words_df.loc[len(words_df.index)] = [embedded_word.word, *embedded_word.reduced_embedding]
+    words_df.loc[len(words_df.index)] = [embedded_word.text, *embedded_word.reduced_embedding]
 
 
 # %%
