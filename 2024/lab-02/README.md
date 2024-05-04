@@ -44,6 +44,4 @@ Let's dive into how we can leverage existing AI models to accelerate the develop
 
 [Unsupervised Learning](unsupervised-learning.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/unsupervised-learning.ipynb)
 
-[Text Classifier with Transfer Learning](text-classifier.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/text-classifier.ipynb)
-
-[Image Classifier with Transfer Learning](image-classifier.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/image-classifier.ipynb)
+[Image Classifier with Transfer Learning](transfer-learning.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-02/transfer-learning.ipynb)
