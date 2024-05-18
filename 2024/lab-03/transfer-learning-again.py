@@ -365,7 +365,7 @@ def safe_summary(title: str) -> str | None:
 # predictions = predict(model, safe_summary("Quantum Computing"))
 # format_predictions(predictions, ArticleLabels)
 #
-# predictions = predict(model, safe_summary("Climate Change")
+# predictions = predict(model, safe_summary("Climate Change"))
 # format_predictions(predictions, ArticleLabels)
 # ```
 #
