@@ -27,6 +27,10 @@
 # ## Setup and Imports
 # Let's start by importing the necessary libraries and modules.
 
+# %%
+# !pip install sentence-transformers wikipedia -q --upgrade
+# !wget -q https://raw.githubusercontent.com/marr75/wecodekc-scientific-computing/main/2024/lab-02/summaries.pkl
+# !wget -q https://raw.githubusercontent.com/marr75/wecodekc-scientific-computing/main/2024/lab-02/word_list.py
 
 # %%
 # fmt: off
@@ -45,8 +49,9 @@ import sentence_transformers
 # A Python wrapper for the Wikipedia API, useful for extracting data from Wikipedia articles.
 import wikipedia
 
-# A custom module containing lists of words for different categories.
+# Custom word list for the lab
 import word_list
+
 # fmt: on
 
 # %%
