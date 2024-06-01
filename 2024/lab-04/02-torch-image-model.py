@@ -32,7 +32,8 @@
 #  • UMAP: A technique for visualizing high-dimensional data.
 #
 # Let’s begin by learning about the timm library!
-
+import base64
+import io
 
 # %%
 # !pip install datasets timm umap-learn plotly pandas --upgrade
@@ -49,6 +50,7 @@ import torch
 import umap
 from IPython.display import display
 from PIL import Image
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 # %%
@@ -92,6 +94,22 @@ def reduce_embeddings(embeddings: np.ndarray, reducer: umap.UMAP, fit: bool = Tr
     return reduced_embeddings
 
 
+def pil_to_base64(image: Image.Image) -> str:
+    """
+    Convert a PIL Image to a base64 encoded string.
+
+    Args:
+        image (Image.Image): The input image.
+
+    Returns:
+        str: The base64 encoded string of the image.
+    """
+    buffer = io.BytesIO()
+    image.save(buffer, format="PNG")
+    img_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
+    return f"data:image/png;base64,{img_str}"
+
+
 def make_dataframe_from_images(dataset: datasets.Dataset) -> pd.DataFrame:
     """
     Create a DataFrame from a dataset with embeddings and reduced embeddings.
@@ -107,7 +125,7 @@ def make_dataframe_from_images(dataset: datasets.Dataset) -> pd.DataFrame:
             {
                 "label": example["label"],
                 "label_name": example["label_name"],
-                "image": example["image"],
+                "image": example["b64_image"],
                 "x": example["reduced_embedding"][0],
                 "y": example["reduced_embedding"][1],
                 "z": example["reduced_embedding"][2],
@@ -134,7 +152,7 @@ def plot_image_embeddings(embeddings_df: pd.DataFrame) -> None:
     fig.show()
 
 
-def create_timm_model(model_name: str = "convnextv2_base.fcmae") -> (torch.nn.Module, any):
+def load_timm_model(model_name: str = "convnextv2_base.fcmae") -> (torch.nn.Module, any):
     """
     Create a TIMM model for extracting embeddings and get the appropriate transforms.
 
@@ -159,9 +177,67 @@ def create_timm_model(model_name: str = "convnextv2_base.fcmae") -> (torch.nn.Mo
     return model, transforms
 
 
+def calculate_cosine_similarity(embedding: np.ndarray, embeddings: np.ndarray) -> np.ndarray:
+    """
+    Calculate cosine similarity between a single embedding and a set of embeddings.
+
+    Args:
+        embedding (np.ndarray): The embedding of the query image.
+        embeddings (np.ndarray): The embeddings of all images in the dataset.
+
+    Returns:
+        np.ndarray: Cosine similarity scores.
+    """
+    embedding = embedding.reshape(1, -1)  # Reshape to 2D array for cosine similarity calculation
+    similarities = cosine_similarity(embedding, embeddings)
+    return similarities.flatten()
+
+
+def find_top_n_similar_images(query_embedding: np.ndarray, embeddings: np.ndarray, n: int = 5) -> np.ndarray:
+    """
+    Find the top N most similar images based on cosine similarity.
+
+    Args:
+        query_embedding (np.ndarray): The embedding of the query image.
+        embeddings (np.ndarray): The embeddings of all images in the dataset.
+        n (int): The number of top similar images to return.
+
+    Returns:
+        np.ndarray: Indices of the top N most similar images.
+    """
+    similarities = calculate_cosine_similarity(query_embedding, embeddings)
+    top_n_indices = np.argsort(similarities)[-n:][::-1]  # Get indices of top N similar images, sorted by similarity
+    return top_n_indices
+
+
+def search_similar_images(
+    query_image: Image.Image, model: torch.nn.Module, transforms: Any, dataset: datasets.Dataset, top_n: int = 5
+) -> pd.DataFrame:
+    """
+    Search for the top N most similar images in the dataset given a query image.
+
+    Args:
+        query_image (Image.Image): The query image.
+        model (torch.nn.Module): The pre-trained model.
+        transforms: The image transformations.
+        dataset: The dataset containing images and embeddings.
+        top_n (int): The number of top similar images to return.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the top N similar images and their details.
+    """
+    query_embedding = get_image_embeddings([query_image], model, transforms)[0]
+    embeddings = np.array([example["embedding"] for example in dataset])
+    top_n_indices = find_top_n_similar_images(query_embedding, embeddings, n=top_n)
+
+    similar_images = [dataset[int(i)] for i in top_n_indices]
+    df = make_dataframe_from_images(similar_images)
+    return df
+
+
 # %%
 # Load our model and get the transforms
-model, transforms = create_timm_model()
+model, transforms = load_timm_model()
 display(model, transforms)
 
 # %%
@@ -179,7 +255,11 @@ embeddings = get_image_embeddings(food101_sample["image"], model, transforms)
 reducer = umap.UMAP(n_components=3)
 reduced_embeddings = reduce_embeddings(embeddings, reducer, fit=True)
 embedded_and_reduced_images = food101_sample.map(
-    lambda x, i: {"embedding": embeddings[i], "reduced_embedding": reduced_embeddings[i]},
+    lambda x, i: {
+        "embedding": embeddings[i],
+        "reduced_embedding": reduced_embeddings[i],
+        "b64_image": pil_to_base64(x["image"]),
+    },
     with_indices=True,
 )
 display(embedded_and_reduced_images[0])
@@ -189,3 +269,28 @@ display(df)
 # %%
 # Plot the image embeddings in 3D
 plot_image_embeddings(df)
+
+# %%
+# Get the image you want to search for similar images
+query_index = 0
+query_image = food101_sample[query_index]["image"]
+display(query_image)
+
+# %%
+# Search for similar images to the query image
+similar_images_df = search_similar_images(query_image, model, transforms, embedded_and_reduced_images)
+display(similar_images_df)
+
+# %%
+# Exercise: Find an image of your favorite food on the internet and use it as a query image to search for similar
+# images in the Food101 dataset. You can download the image and load it using the PIL library. Replace the query_image
+# variable with your image and run the cell to see the results.
+# Define the url of the image you want to use as a query here
+
+# Load the image using PIL
+
+# Search for similar images to the query image
+
+# Display the results
+
+# Question: How well did the model perform in finding similar images to your query image?
