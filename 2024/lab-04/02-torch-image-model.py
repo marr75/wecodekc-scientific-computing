@@ -141,7 +141,7 @@ def plot_image_embeddings(embeddings_df: pd.DataFrame) -> None:
     Plot the image embeddings DataFrame in 3D.
     """
     fig = px.scatter_3d(
-        embeddings_df, x="x", y="y", z="z", hover_data=["label_name", "image"], size_max=60, template="plotly_white"
+        embeddings_df, x="x", y="y", z="z", hover_data=["label_name"], size_max=60, template="plotly_white"
     )
     fig.update_layout(
         title="Image Embeddings Visualization",
@@ -250,7 +250,8 @@ display(food101, food101["train"][0])
 
 # %%
 # Get a sample of 50 examples from the Food101 dataset
-food101_sample = food101["train"].shuffle(seed=42).select(range(30))
+how_many = 50
+food101_sample = food101["train"].shuffle(seed=42).select(range(how_many))
 embeddings = get_image_embeddings(food101_sample["image"], model, transforms)
 reducer = umap.UMAP(n_components=3)
 reduced_embeddings = reduce_embeddings(embeddings, reducer, fit=True)
