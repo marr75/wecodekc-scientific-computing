@@ -18,9 +18,8 @@
 #    - Select `Change runtime type`.
 #
 # 2. **Select GPU:**
-#    - In the pop-up window, find the `Hardware accelerator` dropdown.
-#    - Select `GPU` from the dropdown menu.
-#    - Ensure `GPU` is set to T4, if possible.
+#    - In the pop-up window, find the `Hardware accelerator` section.
+#    - Select the 'T4 GPU' radio button.
 #
 # 3. **Save Settings:**
 #    - Click `Save`.
