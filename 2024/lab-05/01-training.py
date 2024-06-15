@@ -33,7 +33,7 @@
 # latest versions of some important libraries.
 
 # %%
-# !pip install datasets timm plotly pandas --upgrade
+# !pip install plotly pandas torch --upgrade
 
 # %% [markdown]
 # Great! Now that we have the necessary libraries installed, let's dive into the basic elements of a PyTorch model.
