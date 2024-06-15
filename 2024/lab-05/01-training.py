@@ -63,6 +63,11 @@ from IPython.display import display
 # In PyTorch, we define a neural network by creating a class that inherits from `torch.nn.Module`. This class must
 # have two methods: `__init__` and `forward`.
 
+# %%
+# Check if GPU is available
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
+
 
 # %%
 class PythagoreanModel(nn.Module):
@@ -98,7 +103,7 @@ class PythagoreanModel(nn.Module):
 # wizard who will learn to calculate the distance between two points.
 
 # %%
-model = PythagoreanModel()
+model = PythagoreanModel().to(device)
 
 # %% [markdown]
 # Let's take a look at our model.
@@ -143,9 +148,9 @@ c = np.sqrt(a**2 + b**2)  # Solution to the Pythagorean theorem
 # Convert to PyTorch tensors
 input_data = np.column_stack((a, b))  # Combine (a, b) pairs
 # Our input AKA (a, b) pairs, shaped for PyTorch learning
-inputs = torch.tensor(data=input_data, dtype=torch.float32)
+inputs = torch.tensor(data=input_data, dtype=torch.float32).to(device)
 # Our target AKA the distance, shaped for PyTorch learning
-targets = torch.tensor(data=c, dtype=torch.float32).view(-1, 1)
+targets = torch.tensor(data=c, dtype=torch.float32).to(device).view(-1, 1)
 
 # %% [markdown]
 # Let's take a look
@@ -181,7 +186,7 @@ for epoch in range(num_epochs):
     loss.backward()
     # Update model parameters
     optimizer.step()
-    # Print statistics every 100 epochs
+    # Print statistics every 1000 epochs
     if (epoch + 1) % 1000 == 0:
         print(f"Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}")
 
@@ -191,7 +196,7 @@ for epoch in range(num_epochs):
 # %%
 # Inspect model parameters
 for name, param in model.named_parameters():
-    print(f"{name}: {param.data.numpy()}")
+    print(f"{name}: {param.data.cpu().numpy()}")
 
 # %% [markdown]
 # ### Explanation of Weights and Biases
@@ -245,7 +250,7 @@ del model
 
 # %%
 # Create a new instance of the model
-loaded_model = PythagoreanModel()
+loaded_model = PythagoreanModel().to(device)
 
 # Load the saved model parameters
 loaded_model.load_state_dict(torch.load(model_save_path))
@@ -315,15 +320,15 @@ with torch.no_grad():
 
 # %%
 # Redefine model, loss function, and optimizer
-smart_model = PythagoreanModel()
+smart_model = PythagoreanModel().to(device)
 loss_function = nn.MSELoss()
 optimizer = optim.Adam(params=smart_model.parameters(), lr=0.1)
 
 # Define learning rate scheduler
-scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode="min", factor=0.1, patience=10)
+scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode="min", factor=0.1, patience=100)
 
 # Early stopping parameters
-early_stopping_patience = 1000
+early_stopping_patience = 1200
 best_loss = float("inf")
 epochs_no_improve = 0
 
@@ -353,8 +358,8 @@ for epoch in range(num_epochs):
     if epochs_no_improve >= early_stopping_patience:
         print(f"Early stopping triggered at epoch {epoch + 1}")
         break
-    # Print statistics every 100 epochs
-    if (epoch + 1) % 100 == 0:
+    # Print statistics every 1000 epochs
+    if (epoch + 1) % 1000 == 0:
         print(f"Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.12f}")
 
 # %% [markdown]
