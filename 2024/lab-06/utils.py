@@ -55,7 +55,7 @@ def pretty_print_conversation(messages: list[dict]) -> None:
             print(colored(f"function ({message['name']}): {message['content']}\n", role_to_color[message["role"]]))
 
 
-GPT_MODEL = "gpt-3.5-turbo"
+GPT_MODEL = "gpt-4o-mini"
 
 
 @retry(wait=wait_random_exponential(multiplier=1, max=40), stop=stop_after_attempt(3))
@@ -82,17 +82,19 @@ class Conversation:
     conversation_history: list[ChatCompletionMessageParam]
     tool_calls: list[ToolResult]
     tools: list[Callable]
+    mode: str
 
     @functools.cached_property
     def tool_defs(self):
         return get_tool_defs(self.tools)
 
-    def __init__(self, system_message: str, tools: list[Callable]) -> None:
+    def __init__(self, system_message: str, tools: list[Callable], model: str = "gpt-3.5-turbo") -> None:
         self.system_message = system_message
         self.conversation_history = []
         self.add_message("system", system_message)
         self.tools = tools
         self.tool_calls = []
+        self.model = model
 
     def add_message(
         self,
@@ -117,7 +119,9 @@ class Conversation:
     def process_chat_completion(self):
         finish_reason = None
         while finish_reason != "stop" and finish_reason != "length":
-            response = chat_completion_request(messages=self.conversation_history, tools=self.tool_defs)
+            response = chat_completion_request(
+                messages=self.conversation_history, tools=self.tool_defs, model=self.model
+            )
             response_message = response.choices[0].message
             self.add_message_from_response(response_message)
             tool_call_results = process_response(response, self.tools)
