@@ -1,5 +1,8 @@
 """
-
+This is a warmup exercise. The instructions, documentation, and implementations are missing. Let's complete the code
+together. We will implement a Rock-Paper-Scissors game. The user will play against the computer. The computer will
+randomly choose between Rock, Paper, and Scissors. The user will provide their choice, and the winner will be
+determined. The game will continue until the user decides to stop playing.
 """
 
 import random
@@ -11,29 +14,30 @@ Choice = Literal["Rock", "Paper", "Scissors"]
 
 
 def get_computer_choice() -> Choice:
-    return random.choice(["Rock", "Paper", "Scissors"])
+    """
+
+    """
+    ...
 
 
 def determine_winner(user_choice: Choice, computer_choice: Choice) -> str:
-    if user_choice == computer_choice:
-        return "It's a tie!"
-    if (
-        (user_choice == "Rock" and computer_choice == "Scissors")
-        or (user_choice == "Paper" and computer_choice == "Rock")
-        or (user_choice == "Scissors" and computer_choice == "Paper")
-    ):
-        return "User wins!"
-    return "Computer wins!"
+    """
+
+    """
+    ...
 
 
 system_message = (
-    "Play Rock-Paper-Scissors with the user. "
-    "Use the provided tools to make a choice and determine the winner. "
-    "Ask the user for their choice, then make your choice, and determine the winner. "
-    "Celebrate your victories and console the user when they win. "
+  ""
 )
 tools = [get_computer_choice, determine_winner]
-conversation = utils.Conversation(system_message=system_message, tools=tools, model="gpt-4o-mini")
+conversation = utils.Conversation(system_message=system_message, tools=tools)
 user_message = "I want to play Rock-Paper-Scissors."
 conversation.add_message(role="user", content=user_message)
+conversation.process_chat_completion()
+conversation.add_message(role="user", content="Rock")
+conversation.process_chat_completion()
+conversation.add_message(role="user", content="Paper")
+conversation.process_chat_completion()
+conversation.add_message(role="user", content="Scissors")
 conversation.process_chat_completion()
