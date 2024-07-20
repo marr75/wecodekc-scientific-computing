@@ -16,7 +16,6 @@ def add_mark(col: int, row: int, mark: Mark) -> str:
     """
     Add a mark to the board at the given column and row.
     """
-    global board_state
     if board_state[row][col] != "-":
         raise ValueError("Cell is already occupied")
     board_state[row][col] = mark
@@ -27,7 +26,6 @@ def peek_at_board() -> str:
     """
     Display the current state of the board.
     """
-    global board_state
     return "\n".join([" | ".join(row) for row in board_state])
 
 
@@ -35,12 +33,9 @@ def clear_board() -> None:
     """
     Clear the board.
     """
-    global board_state
-    board_state = [
-        ["-", "-", "-"],
-        ["-", "-", "-"],
-        ["-", "-", "-"],
-    ]
+    for row in board_state:
+        for i in range(3):
+            row[i] = "-"
 
 
 victories = {
@@ -63,7 +58,6 @@ def check_victory(mark: Mark) -> bool:
     """
     Check if the given mark has won the game.
     """
-    global board_state
     for row in board_state:
         if all(cell == mark for cell in row):
             return True
