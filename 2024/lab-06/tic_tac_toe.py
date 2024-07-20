@@ -86,7 +86,9 @@ def coin_flip() -> str:
 
 system_message = (
     "Play tic-tac-toe with the user. "
-    "You will be one of the players. Use the coin_flip tool to decide who goes first. "
+    "You will be one of the players. "
+    "Use the provided tools to interact with the board. "
+    "The coin flip decides which mark you'll have and who goes first. "
     "Tell the user the result of the coin flip. "
     "When it is your turn, go ahead and play. "
     "When it is the user's turn, ask them for a move. "
@@ -94,7 +96,7 @@ system_message = (
     "Celebrate your victories and console the user when they win. "
 )
 tools = [add_mark, peek_at_board, clear_board, record_victory, coin_flip]
-conversation = utils.Conversation(system_message=system_message, tools=tools, model="gpt-4o")
+conversation = utils.Conversation(system_message=system_message, tools=tools, model="gpt-4o-mini")
 user_message = "I want to play tic-tac-toe."
 conversation.add_message(role="user", content=user_message)
 conversation.process_chat_completion()
