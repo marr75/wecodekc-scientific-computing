@@ -96,7 +96,10 @@ system_message = (
     "Celebrate your victories and console the user when they win. "
 )
 tools = [add_mark, peek_at_board, clear_board, record_victory, coin_flip]
-conversation = utils.Conversation(system_message=system_message, tools=tools, model="gpt-4o-mini")
-user_message = "I want to play tic-tac-toe."
-conversation.add_message(role="user", content=user_message)
-conversation.process_chat_completion()
+
+if __name__ == "__main__":
+    conversation = utils.Conversation(system_message=system_message, tools=tools, model="gpt-4o-mini")
+    user_message = "I want to play tic-tac-toe."
+    conversation.add_message(role="user", content=user_message)
+    conversation.process_chat_completion()
+    conversation.main_loop()

@@ -25,13 +25,15 @@ def determine_winner(user_choice: Choice, computer_choice: Choice) -> str:
 
 system_message = ""
 tools = [get_computer_choice, determine_winner]
-conversation = utils.Conversation(system_message=system_message, tools=tools)
-user_message = "I want to play Rock-Paper-Scissors."
-conversation.add_message(role="user", content=user_message)
-conversation.process_chat_completion()
-conversation.add_message(role="user", content="Rock")
-conversation.process_chat_completion()
-conversation.add_message(role="user", content="Paper")
-conversation.process_chat_completion()
-conversation.add_message(role="user", content="Scissors")
-conversation.process_chat_completion()
+
+if __name__ == "__main__":
+    conversation = utils.Conversation(system_message=system_message, tools=tools)
+    user_message = "I want to play Rock-Paper-Scissors."
+    conversation.add_message(role="user", content=user_message)
+    conversation.process_chat_completion()
+    conversation.add_message(role="user", content="Rock")
+    conversation.process_chat_completion()
+    conversation.add_message(role="user", content="Paper")
+    conversation.process_chat_completion()
+    conversation.add_message(role="user", content="Scissors")
+    conversation.process_chat_completion()

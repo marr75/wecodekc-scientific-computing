@@ -180,3 +180,17 @@ class Conversation:
             finish_reason = response.choices[0].finish_reason
         # Append the tool call results to the conversation history
         self.display_conversation()
+
+    def main_loop(self) -> None:
+        """
+        The main loop that continuously takes user input, adds it to the conversation,
+        processes the chat completion, and displays the conversation.
+        """
+        print("Type 'exit' to end the conversation.")
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() == "exit":
+                print("Ending conversation.")
+                break
+            self.add_message(role="user", content=user_input)
+            self.process_chat_completion()
