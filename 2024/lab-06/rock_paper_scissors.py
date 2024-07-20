@@ -14,22 +14,16 @@ Choice = Literal["Rock", "Paper", "Scissors"]
 
 
 def get_computer_choice() -> Choice:
-    """
-
-    """
+    """ """
     ...
 
 
 def determine_winner(user_choice: Choice, computer_choice: Choice) -> str:
-    """
-
-    """
+    """ """
     ...
 
 
-system_message = (
-  ""
-)
+system_message = ""
 tools = [get_computer_choice, determine_winner]
 conversation = utils.Conversation(system_message=system_message, tools=tools)
 user_message = "I want to play Rock-Paper-Scissors."

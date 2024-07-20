@@ -5,18 +5,7 @@ from typing import Callable, Literal
 
 from llm_easy_tools import get_tool_defs, process_response, ToolResult
 from openai import OpenAI
-from openai.types.chat import (
-    ChatCompletionToolParam,
-    ChatCompletion,
-    ChatCompletionMessageParam,
-    ChatCompletionSystemMessageParam,
-    ChatCompletionUserMessageParam,
-    ChatCompletionAssistantMessageParam,
-    ChatCompletionToolMessageParam,
-    ChatCompletionFunctionMessageParam,
-    ChatCompletionMessageToolCall,
-    ChatCompletionMessage,
-)
+from openai.types import chat as chat_types
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 from termcolor import colored
 from dotenv import load_dotenv
@@ -63,11 +52,11 @@ GPT_MODEL = "gpt-4o-mini"
 
 @retry(wait=wait_random_exponential(multiplier=1, max=40), stop=stop_after_attempt(3))
 def chat_completion_request(
-    messages: list[ChatCompletionMessageParam],
-    tools: list[ChatCompletionToolParam] = None,
+    messages: list[chat_types.ChatCompletionMessageParam],
+    tools: list[chat_types.ChatCompletionToolParam] = None,
     tool_choice: Literal["none", "auto", "required"] = "auto",
     model: str = GPT_MODEL,
-) -> ChatCompletion:
+) -> chat_types.ChatCompletion:
     """
     Requests a chat completion from the OpenAI API with retry logic.
 
@@ -98,7 +87,7 @@ class Conversation:
     A class to manage and interact with a chat conversation.
     """
 
-    conversation_history: list[ChatCompletionMessageParam]
+    conversation_history: list[chat_types.ChatCompletionMessageParam]
     tool_calls: list[ToolResult]
     tools: list[Callable]
     mode: str
@@ -143,12 +132,12 @@ class Conversation:
             content (str, optional): The content of the message.
             name (str, optional): The name of the tool (if applicable).
         """
-        message: ChatCompletionMessageParam = {"role": role, "content": content}
+        message: chat_types.ChatCompletionMessageParam = {"role": role, "content": content}
         if name:
             message["name"] = name
         self.conversation_history.append(message)
 
-    def add_message_from_response(self, response_message: ChatCompletionMessage) -> None:
+    def add_message_from_response(self, response_message: chat_types.ChatCompletionMessage) -> None:
         """
         Adds a message from a response to the conversation history.
 
