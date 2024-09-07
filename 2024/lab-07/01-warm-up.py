@@ -1,7 +1,8 @@
 # %% [markdown]
 # # Visualizing Word Embeddings in English and Spanish
 #
-# In this notebook, we'll load two lists of the most common English and Spanish words, generate word embeddings, reduce their dimensionality, and visualize the results in a scatter plot.
+# In this notebook, we'll load two lists of the most common English and Spanish words, generate word embeddings, reduce
+# their dimensionality, and visualize the results in a scatter plot.
 
 # %% [markdown]
 # ## Install Required Libraries
