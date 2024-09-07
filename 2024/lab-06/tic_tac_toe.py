@@ -87,12 +87,11 @@ system_message = (
     "When it is your turn, go ahead and play. "
     "When it is the user's turn, ask them for a move. "
     "Analyze the board and record victories when appropriate. "
-    "Celebrate your victories and console the user when they win. "
+    "Celebrate your victories and console the user when they lose. "
 )
 tools = [add_mark, peek_at_board, clear_board, record_victory, coin_flip]
 
 if __name__ == "__main__":
-    conversation = utils.Conversation(system_message=system_message, tools=tools, model="gpt-4o-mini")
     user_message = "I want to play tic-tac-toe."
     conversation.add_message(role="user", content=user_message)
     conversation.process_chat_completion()
