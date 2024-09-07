@@ -74,7 +74,7 @@ By the end of this lab, students should be able to:
 
 ## Lab Activity 1
 
-[Warm Up](01-warm-up.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-071/01-warm-up.ipynb)
+[Warm Up](01-warm-up.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-07/01-warm-up.ipynb)
 
 Students will be guided through a coding exercise where they will:
 1. Encode a set of English and Spanish words using pre-trained word embedding models.
