@@ -72,12 +72,62 @@ By the end of this lab, students should be able to:
 
 ---
 
-## Lab Activity
+## Lab Activity 1
 
 Students will be guided through a coding exercise where they will:
 1. Encode a set of English and Spanish words using pre-trained word embedding models.
 2. Visualize these embeddings using UMAP dimensionality reduction.
 3. Create Kernel Density Estimate (KDE) plots for both languages, showing word distributions in 2D space.
+
+---
+
+## Lab Activity 2
+
+## Exercise: Evaluating LLM Performance with and without RAG/PAL
+
+### Overview
+In this exercise, we will demonstrate the difference between a standard LLM and one enhanced with PAL (Program-Aided 
+Logic) or RAG (Retrieval-Augmented Generation). The task involves solving a series of difficult floating-point math 
+problems that the LLM is not typically trained to handle, and comparing results between the two approaches.
+
+### Objective
+Students will:
+- See how LLMs struggle with "out-of-distribution" problems (such as floating-point arithmetic) without external tools.
+- Use RAG/PAL to significantly improve the LLM’s accuracy by feeding it the problem-answer pairs as reference material.
+- Compare and reflect on the effectiveness of PAL and RAG for improving LLM performance.
+
+### Steps
+
+#### 1. **Baseline Test (No PAL/RAG)**
+   - Present the LLM with 5 randomly chosen math problems from the list of generated floating-point problems.
+   - Do **not** provide the LLM with any external resources (no PAL or RAG) and ask it to solve the problems on its own.
+   - Record the results and observe how accurately the LLM can compute the answers. 
+
+#### 2. **Enhanced Test (With PAL/RAG)**
+   - Now, provide the LLM with access to the entire list of problem-answer pairs.
+   - Ask the LLM to solve the same problems, but this time using **PAL** or **RAG** to retrieve the correct answers 
+   - from the reference data.
+   - Record the results and observe the improvement in accuracy.
+
+#### 3. **Comparison and Analysis**
+   - Compare the results of the **baseline test** (without PAL/RAG) with the **enhanced test** (with PAL/RAG).
+   - Discuss:
+     - How much more accurate the LLM is when it uses RAG/PAL.
+     - Why LLMs struggle with out-of-distribution tasks like floating-point arithmetic.
+     - How PAL and RAG can augment the capabilities of LLMs for specific use cases.
+
+### Materials
+- The list of 30 generated floating-point problems and their answers (`floating_point_problems_with_answers.txt`).
+- LLM for testing both without and with PAL/RAG.
+  
+### Key Learning Points
+- **RAG**: How retrieval-augmented generation helps LLMs access and use external information to improve accuracy.
+- **PAL**: How program-aided logic enhances LLMs by offloading complex tasks like math to external code execution.
+- **LLM Limitations**: Understanding the limitations of LLMs when dealing with complex, uncommon, or 
+- out-of-training-distribution tasks.
+  
+This hands-on demonstration helps students understand both the weaknesses of large language models and the powerful 
+solutions PAL and RAG provide in practice.
 
 ---
 
