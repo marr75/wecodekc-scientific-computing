@@ -155,7 +155,7 @@ to a less specialized model (an embedding model).
 
 ## Lab Activity 5
 
-[Your Own Application](05-your-application.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-sientific-computing/blob/main/2024/lab-07/05-your-application.ipynb)
+[Your Own Application](05-your-application.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-07/05-your-application.ipynb)
 
 Students will design and implement their own application of a cross-encoder model. They will be encouraged to think
 creatively about how to apply this technology to a problem of their choosing.
