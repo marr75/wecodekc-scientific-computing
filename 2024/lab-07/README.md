@@ -140,7 +140,7 @@ applied responsibly in real-world scenarios.
 
 ## Lab Activity 3
 
-[Warm Up](03-warm-up.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-07/03-warm-up.ipynb)
+[Warm Up](03-warm-up-2.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-07/03-warm-up-2.ipynb)
 [DeBERTa Model Explanation](deberta-model-explanation.md)
 
 Students will examine the structure of a State of the Art Cross-Encoder model
