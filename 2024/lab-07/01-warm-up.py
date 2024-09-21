@@ -105,7 +105,6 @@ sns.kdeplot(
     shade=True,
     bw_adjust=0.5,
 )
-
 # Enhance the plot for English words
 plt.title("KDE Plot for English Word Embeddings")
 plt.xlabel("Component 1")
