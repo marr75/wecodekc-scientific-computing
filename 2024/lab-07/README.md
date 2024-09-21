@@ -137,3 +137,25 @@ solutions PAL and RAG provide in practice.
 
 In addition to technical skills, the lab encourages students to reflect on how their knowledge of AI and LLMs could be 
 applied responsibly in real-world scenarios.
+
+## Lab Activity 3
+
+[Warm Up](03-warm-up.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-07/03-warm-up.ipynb)
+[DeBERTa Model Explanation](deberta-model-explanation.md)
+
+Students will examine the structure of a State of the Art Cross-Encoder model
+
+## Lab Activity 4
+
+[Cross Encoder Example](04-cross-encoder-example.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-scientific-computing/blob/main/2024/lab-07/04-cross-encoder-example.ipynb)
+
+Students will learn how to use a cross-encoder model to generate similarity scores between two pieces of text. They
+will see how the model can bring substantial artificial intelligence to bear on a simple task and compare performance
+to a less specialized model (an embedding model).
+
+## Lab Activity 5
+
+[Your Own Application](05-your-application.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marr75/wecodekc-sientific-computing/blob/main/2024/lab-07/05-your-application.ipynb)
+
+Students will design and implement their own application of a cross-encoder model. They will be encouraged to think
+creatively about how to apply this technology to a problem of their choosing.
